@@ -66,11 +66,11 @@ module.exports={
             // .then(() => {
             //   return runLintFix(cwd, data, green)
             // })
+            // .then(() => {
+            //   printMessage(data, green)
+            // })
             .then(() => {
               return cdAndRun(cwd,data,green)
-            })
-            .then(() => {
-              printMessage(data, green)
             })
             .catch(e => {
               console.log(chalk.red('Error:'), e)

@@ -22,9 +22,16 @@ exports.installDependencies = function installDependencies(
   })
 }
 
+/**
+ * Runs `npm run dev` in the project directory
+ * @param {string} cwd Path of the created project directory
+ * @param {object} data Data from questionnaire
+ */
 exports.cdAndRun = function cdAndRun(cwd, data, color) {
+  console.log(`\n\n# ${color('开始启动项目中，别动！ ...')}`)
+  console.log('# ========================\n')
   runCommand('cd',[data.destDirName],{cwd});
-  return runCommand(data.autoInstall,['dev'],{cwd})
+  return runCommand(data.autoInstall,['run dev'],{cwd})
 }
 
 /**
