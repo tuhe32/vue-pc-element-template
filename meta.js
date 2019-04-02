@@ -52,7 +52,9 @@ module.exports={
         "tslint.json": "lint",
         "tsconfig.json": "lint"
     },
-    
+    skipInterpolation: [
+      "**/*.vue"
+    ],
     complete: function (data,{chalk}) {
         const green = chalk.green
 
