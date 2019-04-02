@@ -22,6 +22,11 @@ exports.installDependencies = function installDependencies(
   })
 }
 
+exports.cdAndRun = function cdAndRun(cwd, data, color) {
+  runCommand('cd',[data.destDirName],{cwd});
+  return runCommand(data.autoInstall,['dev'],{cwd})
+}
+
 /**
  * Runs `npm run lint -- --fix` in the project directory
  * @param {string} cwd Path of the created project directory
