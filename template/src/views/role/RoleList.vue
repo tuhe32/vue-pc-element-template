@@ -4,7 +4,6 @@
       <el-row :gutter="20">
         <el-col :span="5">
           <md-input v-model="params.key" icon="search" name="title" placeholder="请输入角色名称">角色名称</md-input>
-          <!--<el-input v-model="params.key" placeholder="请输入角色名称"></el-input>-->
         </el-col>
         <el-col :span="3">
           <el-select v-model="params.availableStatus" placeholder="请选择角色状态" @change="search">

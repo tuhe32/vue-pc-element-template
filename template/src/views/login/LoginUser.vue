@@ -3,7 +3,7 @@
     <div class="user-login-bg" :style="{'background-image':`url(${backgroundImage})`}"></div>
     <div class="content-wrapper">
       <h2 class="slogan">
-        欢迎使用 <br /> GoGreen 管理系统
+        欢迎使用 <br /> {{projectName}} 管理系统
       </h2>
       <div class="form-container">
         <h4 class="form-title">登录</h4>
