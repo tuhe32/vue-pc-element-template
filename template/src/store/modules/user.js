@@ -77,7 +77,7 @@ const user = {
 
           let adminUser = data.adminUser;
           // if (adminUser.roles && adminUser.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', "admin")
+          commit('SET_ROLES', "admin")
           // } else {
           //   reject('getInfo: roles must be a non-null array !')
           // }

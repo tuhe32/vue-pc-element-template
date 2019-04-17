@@ -4,9 +4,10 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 // create an axios instance
-console.log('[process.env.BASE_API]',process.env.BASE_API)
+console.log('[process.env.BASE_API]',process.env.VUE_APP_BASE_API)
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
+  baseURL: process.env.VUE_APP_BASE_API, // api的base_url
+  // withCredentials: true, // 跨域请求时发送 cookies
   timeout: 30000, // request timeout
   method:'POST'
 })
@@ -16,14 +17,14 @@ service.interceptors.request.use(config => {
   // Do something before request is sent
   console.log('[config]',config)
   if (store.getters.token) {
-    // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
+    // 让每个请求携带token
     config.headers['token'] = getToken()
   }
   return config
 }, error => {
   // Do something with request error
   console.log(error) // for debug
-  Promise.reject(error)
+  return Promise.reject(error)
 })
 
 // respone interceptor
@@ -38,11 +39,13 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (response.status !== 200) {
-      Message({
-        message: res.msg,
-        type: 'error',
-        duration: 5 * 1000
-      })
+        Message({
+            message: res.msg,
+            type: 'error',
+            duration: 5 * 1000
+        })
+        return Promise.reject('error')
+    }else {
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
       if (res.code === -1) {
         MessageBox.confirm('你已被登出，可以重新登录，或者取消继续留在该页面', '确定登出', {
@@ -62,8 +65,6 @@ service.interceptors.response.use(
           duration: 4 * 1000
         })
       }
-      return Promise.reject('error')
-    } else {
       return res
     }
   },

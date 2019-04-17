@@ -3,30 +3,28 @@
     <router-view/>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'App'
-}
+    export default {
+        name: 'App'
+    }
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
-  .error{
-    .v-message{
-      margin-left: 0px;
-      background: none;
-      text-indent: 0;
-      color: #f60;
-      font-size: 13px;
-      i.icon-tishi1{
-        display: inline-block;
-        font-size: 18px;
-        color: #60bbf9;
-        vertical-align: middle;
-      }
-    }
-    .v-s-message{
-      display: none;
-    }
-  }
+<style lang="scss">
+/*#app {*/
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+  /*text-align: center;*/
+  /*color: #2c3e50;*/
+/*}*/
+/*#nav {*/
+  /*padding: 30px;*/
+  /*a {*/
+    /*font-weight: bold;*/
+    /*color: #2c3e50;*/
+    /*&.router-link-exact-active {*/
+      /*color: #42b983;*/
+    /*}*/
+  /*}*/
+/*}*/
 </style>

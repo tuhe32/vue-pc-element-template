@@ -33,40 +33,5 @@ export default {
     if (!name) return;
     window.localStorage.removeItem(name);
   },
-  isNotBlank:function (value) {
-    if(value != null && value != undefined && value != '' && value.trim() != '') {
-      return true;
-    }else return false;
-  },
-  isNotBlankObj:function (value) {
-    if(value != null && value != undefined) {
-      return true;
-    }else return false;
-  },
-  isBlank:function (value) {
-    if(value != null && value != undefined && value != '' && value.trim() != '') {
-      return false;
-    }else return true;
-  },
-  isBlankObj:function (value) {
-    if(value == null || value == undefined) {
-      return true
-    }else return false
-  },
-  isNotBlankObjs:function (...vals) {
-    var bol  = false;
-    if(vals == null || vals == undefined || vals.length == 0) return bol;
-    vals.every(obj => {
-      obj = obj == null || obj == undefined?'':obj+'';
-      if(obj != null && obj != undefined && obj != '' && obj.trim() != '') {
-        bol = true;
-        return false;
-      }
-    })
-    return bol;
-  },
-  isUnDeleted:function (val) {
-      if(val === 'UN_DELETED' || val == 0 || val == "0") return true;
-      else return false;
-  }
+
 }

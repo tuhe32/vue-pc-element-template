@@ -7,7 +7,7 @@ import { asyncRouterMap, constantRouterMap,componentsMap } from '@/router'
  */
 function hasPermission(roles, route) {
   if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.indexOf(role) >= 0)
+    return roles.some(role => route.meta.roles.includes(role))
   } else {
     return true
   }
@@ -68,20 +68,21 @@ function generateRouter(item) {
 
 const permission = {
   state: {
-    routers: constantRouterMap,
-    addRouters: []
+    routes: [],
+    addRoutes: []
   },
   mutations: {
-    SET_ROUTERS: (state, routers) => {
-      state.addRouters = routers
-      state.routers = constantRouterMap.concat(routers)
+    SET_ROUTES: (state, routes) => {
+        console.log('[constantRouterMap]',constantRouterMap)
+        state.addRoutes = routes
+        state.routes = constantRouterMap.concat(routes)
     }
   },
   actions: {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { serverRouterMap } = data
-        let accessedRouters
+        let accessedRouters = []
         // if (roles.indexOf('admin') >= 0) {
         //   accessedRouters = asyncRouterMap
         // } else {
@@ -89,7 +90,7 @@ const permission = {
           accessedRouters = convertRouter(serverRouterMap)
         console.log('[999]',accessedRouters)
         // }
-        commit('SET_ROUTERS', accessedRouters)
+        commit('SET_ROUTES', accessedRouters)
         resolve()
       })
     }

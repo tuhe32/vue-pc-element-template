@@ -1,9 +1,10 @@
 <template>
   <div class="app-container product-list">
-    <el-form>
+    <el-form class="mdtop">
       <el-row :gutter="20">
         <el-col :span="5">
-          <el-input v-model="params.key" placeholder="请输入角色名称"></el-input>
+          <md-input v-model="params.key" icon="search" name="title" placeholder="请输入角色名称">角色名称</md-input>
+          <!--<el-input v-model="params.key" placeholder="请输入角色名称"></el-input>-->
         </el-col>
         <el-col :span="3">
           <el-select v-model="params.availableStatus" placeholder="请选择角色状态" @change="search">
@@ -13,47 +14,41 @@
           </el-select>
         </el-col>
         <el-col :span="8">
-          <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+          <el-button type="primary" icon="el-icon-search" v-waves @click="search">搜索</el-button>
           <el-button type="success" icon="el-icon-circle-plus-outline" @click="addRole">新增角色</el-button>
         </el-col>
       </el-row>
     </el-form>
-    <el-table  :data="roleList">
+    <el-table  :data="roleList" height="100px" v-el-height-adaptive-table="{bottomOffset: 50}">
       <el-table-column type="index"></el-table-column>
       <el-table-column prop="name" label="角色名称" :min-width="100"  align="center"></el-table-column>
       <el-table-column prop="availableStatus" label="状态" align="center">
         <template slot-scope="scope">
-          <p v-if="scope.row.availableStatus == 1">启用</p>
-          <p v-else>禁用</p>
+          <span v-if="scope.row.availableStatus == 1">启用</span> <!-- template中 必须用span，不用p标签，-->
+          <span v-else>禁用</span>
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="备注" align="center" ></el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" min-width="150" fixed="right" align="center">
         <template slot-scope="scope">
           <el-button type="success" @click="handleEdit(scope.$index, scope.row)" size="mini">编辑</el-button>
-          <disable name="删除" :rowId="scope.row.id.toString()" @emit="handleDelete" ></disable>
+          <disable type="danger" name="删除" :rowId="scope.row.id.toString()" @emit="handleDelete" ></disable>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="params.page"
-      :page-sizes="pageSizes"
-      :page-size="params.pageSize"
-      layout=" sizes, prev, pager, next,total"
-      :total="total">
-    </el-pagination>
+    <pagination v-show="total>0" :total="total" :page.sync="params.page" :limit.sync="params.pageSize" @pagination="init"></pagination>
   </div>
 </template>
 <script>
-  import {getRoleList,deleteRole} from "../../api/api";
+  import {getRoleList,deleteRole} from "../../api/auth";
   import {fmMoney,fmDate} from "../../utils";
   import Disable from "@/components/Disable";
+  import Pagination from '@/components/Pagination'
+  import MdInput from '@/components/MDinput'
 
   export default {
     name:'role',
-    components:{Disable},
+    components:{Disable, Pagination, MdInput},
     data(){
       return{
         params: {
@@ -68,39 +63,15 @@
       }
     },
     methods:{
-      handleCurrentChange(val){
-        this.params.page = val;
-        this.init();
-      },
-      handleSizeChange(val){
-        this.params.pageSize = val;
-        this.init();
-      },
       handleEdit(index,row){
         this.$router.push({name: 'RoleDetail',query:{id:row.id}})
       },
-      //  async handleDelete(index,row){
-      //  let resp = await deleteRole({id:row.id});
-      //  this.init()
-      // },
-
       async handleDelete(id,name){
         if(name == '删除') {
-          let data = {
-            id:id,
-          }
+          let data = { id:id, }
           let resp = await deleteRole(data)
-          if(this.qUtil.validResp(resp)){
-            this.$message({
-              message: '删除成功!',
-              type: 'success'
-            });
-          }else {
-            this.$message({
-              message: '删除失败!',
-              type: 'warning'
-            });
-          }
+          if(this.qUtil.validResp(resp)) this.$message({ message: '删除成功!', type: 'success' });
+          else  this.$message({  message: '删除失败!', type: 'warning' });
           this.init();
         }
       },
@@ -119,12 +90,6 @@
         this.init();
       },
       async init(){
-        // let data = {
-        //   infomation : this.information,
-        //   infoStatus : this.infoStatus,
-        //   pageNum : this.page,
-        //   pageSize : this.pageSize,
-        // };
         let resp = await getRoleList(this.params);
         console.log('[测试接口]',resp);
         if(resp.data!=null){
@@ -137,7 +102,6 @@
       this.init();
     }
   }
-
 </script>
 <style>
   .product-list .el-table,.product-list .el-table th{

@@ -5,7 +5,7 @@
       <el-button type="danger" size="mini" @click="handleHide(1)" round>确认</el-button>
       <el-button size="mini" class="btnClose" @click="handleHide(0)" round>关闭</el-button>
     </div>
-    <el-button size="mini" :type="type" slot="reference">{{name}}</el-button>
+    <el-button size="mini" v-waves :type="type" slot="reference">{{name}}</el-button>
   </el-popover>
 </template>
 <script>

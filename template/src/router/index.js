@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/views/layout/Layout'
+import Layout from '@/layout'
 
 Vue.use(Router)
 
@@ -13,11 +13,11 @@ export const constantRouterMap = [
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
-      name: 'dashboard',
+      name: 'Dashboard',
       meta: { title: '首页', icon: 'iconfont icon-index-copy', noCache: true }
     }]
   },
-  { path: '/404', redirect: '/',  hidden: true },
+  { path: '/404', redirect: '/',  hidden: true }
   // {
   //   path: '/webUser',
   //   component: Layout,
@@ -171,14 +171,4 @@ export const componentsMap = {
   "RoleDetail":() => import('@/views/role/RoleDetail'),
   "WebUserList":() => import('@/views/webUser/WebUserList'),
   "WebUserDetail":() => import('@/views/webUser/WebUserDetail'),
-  // "ProductType":() => import('@/views/productType/ProductTypeList'),
-  // "PinProduct":() => import('@/views/pinProduct/PinProductList'),
-  // "Product":() => import('@/views/product/ProductList'),
-  // "Order":() => import('@/views/order/OrderList'),
-  // "Promote":() => import('@/views/promote/PromoteList'),
-  // "DistributionSettingDetail":() => import('@/views/distribution/DistributionSettingDetail'),
-  // "AgencyManagement":() => import('@/views/agency/AgencyManagement'),
-  // "SubordinateList":() => import('@/views/agency/SubordinateList'),
-  // "DistributionBillList":() => import('@/views/distribution/DistributionBillList'),
-  // "WithdrawCash":() => import('@/views/withdrawCash/WithdrawCashAuditList'),
 }

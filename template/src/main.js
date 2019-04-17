@@ -1,48 +1,38 @@
 import Vue from 'vue'
-import App from './App'
-import router from './router'
-import store from './store'
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+
 import Element from 'element-ui'
-import SimpleVueValidation from "simple-vue-validator";
-import baseUtil from "@/utils/baseUtil";
-import qUtil from "@/utils/queryUtil"
+import './assets/styles/element-variables.scss'
 
-import 'element-ui/lib/theme-chalk/index.css'
-import './assets/fa/font-awesome.css'
 import '@/assets/styles/index.scss' // global css
-import 'normalize.css/normalize.css'// A modern alternative to CSS resets
-
-
-import validatorMessage from "@/utils/validatorMessage";
-
-import '@/assets/styles/index.scss'
 
 import './permission' // permission control
 
-import * as filters from './filters' // global filters
+import baseUtil from "@/utils/baseUtil";
+import qUtil from "@/utils/queryUtil"
+import validate from "@/utils/validate"
+
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+import adaptive from '@/directive/el-table/index.js'
+import waves from '@/directive/waves/index.js'
+Vue.use(adaptive.install)
+Vue.use(waves.install)
 
 Vue.use(Element, {
-  size: 'medium' // set element-ui default size
-  // i18n: (key, value) => i18n.t(key, value)
+    size: 'small' // set element-ui default size
+    // i18n: (key, value) => i18n.t(key, value)
 })
-/* 简单验证，全局配置*/
-Vue.use(SimpleVueValidation);
-SimpleVueValidation.extendTemplates(validatorMessage);
-Vue.prototype.validator = SimpleVueValidation.Validator;
-
 Vue.prototype.baseUtil = baseUtil;
 Vue.prototype.qUtil = qUtil;
-// register global utility filters.
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
+Vue.prototype.validUtil = validate;
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   store,
   render: h => h(App)
-})
+}).$mount('#app')

@@ -61,10 +61,10 @@
       return {
         backgroundImage: 'https://img.alicdn.com/tfs/TB1zsNhXTtYBeNjy1XdXXXXyVXa-2252-1500.png',
         user: {
-          username: localStorage.userName!=null ? localStorage.userName : null,
-          password: localStorage.password != null ? localStorage.password : null,
+          username: localStorage.userName ? localStorage.userName : null,
+          password: localStorage.password  ? localStorage.password : null,
         },
-        checkPassword:localStorage.checkPassword != null?(localStorage.checkPassword == 'true'?true:false):null,
+        checkPassword:localStorage.checkPassword ?(localStorage.checkPassword == 'true'?true:false):null,
         loading:false,
         redirect:undefined
       };
@@ -110,7 +110,7 @@
     },
   };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import './login.scss';
   .user-login .el-input__inner{
     border: none !important;
