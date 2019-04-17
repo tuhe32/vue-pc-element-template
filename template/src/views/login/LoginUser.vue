@@ -54,6 +54,7 @@
 
 </template>
 <script>
+  import defaultSettings from '@/settings'
 
   export default {
     name: 'login',
@@ -66,7 +67,8 @@
         },
         checkPassword:localStorage.checkPassword ?(localStorage.checkPassword == 'true'?true:false):null,
         loading:false,
-        redirect:undefined
+        redirect:undefined,
+        projectName:defaultSettings.title
       };
     },
     watch: {
