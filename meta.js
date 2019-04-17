@@ -13,12 +13,12 @@ module.exports={
         name: {
             type: 'string',
             required: true,
-            message: '项目文件名是啥',
+            message: '项目名是啥',
         },
         projectName: {
             type: 'string',
             required: true,
-            message: '项目名是啥',
+            message: '项目中文名是啥',
         },
         author: {
             type: 'string',
