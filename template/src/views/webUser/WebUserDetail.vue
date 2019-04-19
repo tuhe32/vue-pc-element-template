@@ -102,7 +102,7 @@
                             })
                         }
                     }
-                }.bind(this))
+                })
             },
             async loadRole() {
                 let resp = await getAllRole();
