@@ -79,7 +79,7 @@
                 rules:{
                     username:[require("请填写用户名"),pattern('^[a-zA-Z0-9\u4e00-\u9fa5]{3,40}$', '用户名为3-12位字母,数字或汉字')],
                     password:[require("请输入密码"),pattern('^[a-zA-Z0-9]{6,12}$','请输入6到12位字母或数字')],
-                    confirmpsd:[{validator:validateConfirmPassword,trigger:'blur'}],
+                    confirmpsd:[{validator:validateConfirmPassword,trigger:'blur',required: true}],
                     name:[require("请填写姓名"),pattern('^[a-zA-Z\u4e00-\u9fa5]{2,40}$','用户名为2-12位字母或汉字')]
                 },
             }
