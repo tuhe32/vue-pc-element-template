@@ -18,7 +18,7 @@
         </el-col>
       </el-row>
     </el-form>
-    <el-table  :data="roleList" height="100px" v-el-height-adaptive-table="{bottomOffset: 50}">
+    <el-table  :data="roleList" height="100px" v-el-height-adaptive-table="{bottomOffset: 55}">
       <el-table-column type="index"></el-table-column>
       <el-table-column prop="name" label="角色名称" :min-width="100"  align="center"></el-table-column>
       <el-table-column prop="availableStatus" label="状态" align="center">

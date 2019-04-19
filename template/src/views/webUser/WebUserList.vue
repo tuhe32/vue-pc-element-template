@@ -18,7 +18,7 @@
         </el-col>
       </el-row>
     </el-form>
-    <el-table  :data="webUserList" height="100px" v-el-height-adaptive-table="{bottomOffset: 50}">
+    <el-table  :data="webUserList" height="100px" v-el-height-adaptive-table="{bottomOffset: 55}">
       <el-table-column type="index"></el-table-column>
       <el-table-column prop="username" label="用户名" align="center"></el-table-column>
       <el-table-column prop="name" label="姓名" align="center"></el-table-column>
