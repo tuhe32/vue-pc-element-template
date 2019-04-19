@@ -86,7 +86,7 @@
         },
         methods: {
             submit() {
-                this.$refs['userForm'].validate(async function (success) {
+                this.$refs['userForm'].validate(async (success)=> {
                     if (success) {
                         let resp = await saveWebUser({
                             adminUser: this.userForm,
