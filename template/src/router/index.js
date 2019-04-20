@@ -14,7 +14,7 @@ export const constantRouterMap = [
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
       name: 'Dashboard',
-      meta: { title: '首页', icon: 'iconfont icon-index-copy', noCache: true }
+      meta: { title: '首页', icon: 'iconfont icon-fenlei', noCache: true }
     }]
   },
   { path: '/404', redirect: '/',  hidden: true }

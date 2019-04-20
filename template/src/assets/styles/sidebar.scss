@@ -55,6 +55,8 @@
       overflow: hidden;
     }
 
+    i.iconfont{margin:0 10px 0 15px !important;}
+
     .svg-icon {
       margin-right: 16px;
     }
@@ -107,7 +109,7 @@
 
       .el-tooltip {
         padding: 0 !important;
-
+        i{margin-left: 15px;}
         .svg-icon {
           margin-left: 20px;
         }
