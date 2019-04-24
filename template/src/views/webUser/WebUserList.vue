@@ -65,7 +65,7 @@
   import MdInput from '@/components/MDinput'
 
   export default {
-    name:"webUser",
+    name:"webUserList",
     components:{Disable, Pagination, MdInput},
     data(){
         return{

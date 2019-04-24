@@ -46,7 +46,7 @@
   import MdInput from '@/components/MDinput'
 
   export default {
-    name:'role',
+    name:'roleList',
     components:{Disable, Pagination, MdInput},
     data(){
       return{
