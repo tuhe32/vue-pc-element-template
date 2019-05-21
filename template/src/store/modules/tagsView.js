@@ -18,7 +18,7 @@ const mutations = {
       state.cachedViews.push(view.name)
     }
   },
-
+  
   DEL_VISITED_VIEW: (state, view) => {
     for (const [i, v] of state.visitedViews.entries()) {
       if (v.path === view.path) {
@@ -36,7 +36,7 @@ const mutations = {
       }
     }
   },
-
+  
   DEL_OTHERS_VISITED_VIEWS: (state, view) => {
     state.visitedViews = state.visitedViews.filter(v => {
       return v.meta.affix || v.path === view.path
@@ -51,7 +51,7 @@ const mutations = {
       }
     }
   },
-
+  
   DEL_ALL_VISITED_VIEWS: state => {
     // keep affix tags
     const affixTags = state.visitedViews.filter(tag => tag.meta.affix)
@@ -60,7 +60,7 @@ const mutations = {
   DEL_ALL_CACHED_VIEWS: state => {
     state.cachedViews = []
   },
-
+  
   UPDATE_VISITED_VIEW: (state, view) => {
     for (let v of state.visitedViews) {
       if (v.path === view.path) {
@@ -72,18 +72,18 @@ const mutations = {
 }
 
 const actions = {
-  addView({ dispatch }, view) {
+  addView({dispatch}, view) {
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },
-  addVisitedView({ commit }, view) {
+  addVisitedView({commit}, view) {
     commit('ADD_VISITED_VIEW', view)
   },
-  addCachedView({ commit }, view) {
+  addCachedView({commit}, view) {
     commit('ADD_CACHED_VIEW', view)
   },
-
-  delView({ dispatch, state }, view) {
+  
+  delView({dispatch, state}, view) {
     return new Promise(resolve => {
       dispatch('delVisitedView', view)
       dispatch('delCachedView', view)
@@ -93,20 +93,20 @@ const actions = {
       })
     })
   },
-  delVisitedView({ commit, state }, view) {
+  delVisitedView({commit, state}, view) {
     return new Promise(resolve => {
       commit('DEL_VISITED_VIEW', view)
       resolve([...state.visitedViews])
     })
   },
-  delCachedView({ commit, state }, view) {
+  delCachedView({commit, state}, view) {
     return new Promise(resolve => {
       commit('DEL_CACHED_VIEW', view)
       resolve([...state.cachedViews])
     })
   },
-
-  delOthersViews({ dispatch, state }, view) {
+  
+  delOthersViews({dispatch, state}, view) {
     return new Promise(resolve => {
       dispatch('delOthersVisitedViews', view)
       dispatch('delOthersCachedViews', view)
@@ -116,20 +116,20 @@ const actions = {
       })
     })
   },
-  delOthersVisitedViews({ commit, state }, view) {
+  delOthersVisitedViews({commit, state}, view) {
     return new Promise(resolve => {
       commit('DEL_OTHERS_VISITED_VIEWS', view)
       resolve([...state.visitedViews])
     })
   },
-  delOthersCachedViews({ commit, state }, view) {
+  delOthersCachedViews({commit, state}, view) {
     return new Promise(resolve => {
       commit('DEL_OTHERS_CACHED_VIEWS', view)
       resolve([...state.cachedViews])
     })
   },
-
-  delAllViews({ dispatch, state }, view) {
+  
+  delAllViews({dispatch, state}, view) {
     return new Promise(resolve => {
       dispatch('delAllVisitedViews', view)
       dispatch('delAllCachedViews', view)
@@ -139,29 +139,31 @@ const actions = {
       })
     })
   },
-  delAllVisitedViews({ commit, state }) {
+  delAllVisitedViews({commit, state}) {
     return new Promise(resolve => {
       commit('DEL_ALL_VISITED_VIEWS')
       resolve([...state.visitedViews])
     })
   },
-  delAllCachedViews({ commit, state }) {
+  delAllCachedViews({commit, state}) {
     return new Promise(resolve => {
       commit('DEL_ALL_CACHED_VIEWS')
       resolve([...state.cachedViews])
     })
   },
-  delCurrentViews({ dispatch, state }, params) {
-      dispatch('delVisitedView', params.view)
-      dispatch('delCachedView', params.view)
-      const latestView = [...state.cachedViews].slice(-1)[0]
-      if (latestView) {
-          params.$router.push(latestView)
-      } else {
-          params.$router.push('/')
-      }
+  async delCurrentViews({dispatch, state}, params) {
+    dispatch('delVisitedView', params.view)
+    dispatch('delCachedView', params.view)
+    // const latestView = [...state.cachedViews].slice(-1)[0]
+    const latestView = params.nextView;
+    if (latestView) {
+      await dispatch('delCachedView', latestView)
+      params.$router.push(latestView)
+    } else {
+      params.$router.push('/')
+    }
   },
-  updateVisitedView({ commit }, view) {
+  updateVisitedView({commit}, view) {
     commit('UPDATE_VISITED_VIEW', view)
   }
 }

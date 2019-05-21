@@ -54,16 +54,16 @@ export const asyncRoutes = [
     path: '/webUser',
     component: Layout,
     redirect: '/webUser/webUserList',
-    name:'WebUser',
+    name:'webUser',
     children: [{
       path: 'webUserList',
-      name: 'WebUserList',
+      name: 'webUserList',
       component: () => import('@/views/webUser/WebUserList'),
       meta: { title: '用户列表', icon: 'webUser' }
     },{
       hidden:true,
       path:'webUserDetail',
-      name:'WebUserDetail',
+      name:'webUserDetail',
       component: () => import('@/views/webUser/WebUserDetail'),
       meta: { title: '用户详情', icon: 'webUserDetail' },
     }]
@@ -72,16 +72,16 @@ export const asyncRoutes = [
     path: '/role',
     component: Layout,
     redirect: '/role/roleList',
-    name:'Role',
+    name:'role',
     children: [{
       path: 'roleList',
-      name: 'RoleList',
+      name: 'roleList',
       component: () => import('@/views/role/RoleList'),
       meta: { title: '角色列表', icon: 'role'},
     },{
       hidden: true,
       path: 'roleDetail',
-      name: 'RoleDetail',
+      name: 'roleDetail',
       component: () => import('@/views/role/RoleDetail'),
       meta: { title: '角色详情', icon: 'roleDetail' },
     }]

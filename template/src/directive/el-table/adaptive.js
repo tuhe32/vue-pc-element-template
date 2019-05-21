@@ -26,12 +26,15 @@ const doResize = (el, binding, vnode) => {
 }
 
 export default {
-  bind(el, binding, vnode) {
+  async bind(el, binding, vnode) {
     el.resizeListener = () => {
-      doResize(window.document.body, binding, vnode)
+      doResize(el, binding, vnode)
     }
-
-    addResizeListener(el, el.resizeListener)
+    
+    await addResizeListener(window.document.body, el.resizeListener)
+    if(window.document.body.__resizeListeners__ && window.document.body.__resizeListeners__.length > 1) {
+      doResize(el, binding, vnode)
+    }
   },
   inserted(el, binding, vnode) {
     doResize(el, binding, vnode)
