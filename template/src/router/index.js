@@ -18,8 +18,8 @@ export const constantRoutes = [
     }]
   },
   { path: '/404', redirect: '/',  hidden: true }
-
-
+  
+  
   // {
   //   path: '/productType',
   //   component: Layout,
@@ -44,26 +44,36 @@ export const constantRoutes = [
   // },
 ]
 
-export default new Router({
+const createRouter = () => new Router({
+  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
+
+const router = createRouter()
+
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
+export default router
 
 export const asyncRoutes = [
   {
     path: '/webUser',
     component: Layout,
     redirect: '/webUser/webUserList',
-    name:'webUser',
+    name:'WebUser',
     children: [{
       path: 'webUserList',
-      name: 'webUserList',
+      name: 'WebUserList',
       component: () => import('@/views/webUser/WebUserList'),
       meta: { title: '用户列表', icon: 'webUser' }
     },{
       hidden:true,
       path:'webUserDetail',
-      name:'webUserDetail',
+      name:'WebUserDetail',
       component: () => import('@/views/webUser/WebUserDetail'),
       meta: { title: '用户详情', icon: 'webUserDetail' },
     }]
@@ -72,16 +82,16 @@ export const asyncRoutes = [
     path: '/role',
     component: Layout,
     redirect: '/role/roleList',
-    name:'role',
+    name:'Role',
     children: [{
       path: 'roleList',
-      name: 'roleList',
+      name: 'RoleList',
       component: () => import('@/views/role/RoleList'),
       meta: { title: '角色列表', icon: 'role'},
     },{
       hidden: true,
       path: 'roleDetail',
-      name: 'roleDetail',
+      name: 'RoleDetail',
       component: () => import('@/views/role/RoleDetail'),
       meta: { title: '角色详情', icon: 'roleDetail' },
     }]

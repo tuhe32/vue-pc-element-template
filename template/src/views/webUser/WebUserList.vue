@@ -67,7 +67,7 @@
   import MdInput from '@/components/MDinput'
 
   export default {
-    name: "webUserList",
+    name: "WebUserList",
     components: {Disable, Pagination, MdInput},
     data() {
       return {
@@ -87,7 +87,7 @@
     },
     methods: {
       handleEdit(index, row) {
-        this.$router.push({name: 'webUserDetail', query: {id: row.id}})
+        this.$router.push({name: 'WebUserDetail', query: {id: row.id}})
       },
       async editDeleted(id, name) {
         if (name == '删除') {
@@ -138,11 +138,11 @@
         this.init();
       },
       addUser() {
-        this.$router.push({name: 'webUserDetail'})
+        this.$router.push({name: 'WebUserDetail'})
       },
       async init() {
         let resp = await getWebUserList(this.params);
-        console.log('[测试接口]', resp);
+        // console.log('[测试接口]', resp);
         if (this.qUtil.validResp(resp)) {
           this.webUserList = resp.data.dataList;
           this.total = resp.data.total;

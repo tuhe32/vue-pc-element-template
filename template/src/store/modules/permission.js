@@ -69,7 +69,6 @@ const permission = {
   },
   mutations: {
     SET_ROUTES: (state, routes) => {
-        console.log('[constantRoutes]',constantRoutes)
         state.addRoutes = routes
         state.routes = constantRoutes.concat(routes)
     }
@@ -84,11 +83,11 @@ const permission = {
         // } else {
         if(serverRouterMap)
           accessedRouters = filterAsyncRoutes(asyncRoutes,serverRouterMap)
-        console.log('[999]',accessedRouters)
+        // console.log('[999]',accessedRouters)
         // }
         accessedRouters.push({ path: '*', redirect: '/404', hidden: true })
         commit('SET_ROUTES', accessedRouters)
-        resolve()
+        resolve(accessedRouters)
       })
     }
   }

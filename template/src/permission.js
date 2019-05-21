@@ -25,8 +25,8 @@ router.beforeEach(async (to, from, next) => {
         try {
           const userInfoResp = await store.dispatch('GetUserInfo');
           const serverRouterMap = userInfoResp.data.serverRouterMap;
-          await store.dispatch('GenerateRoutes', { serverRouterMap });
-          router.addRoutes(store.getters.addRoutes) // 动态添加可访问路由表
+          const accessRoutes = await store.dispatch('GenerateRoutes', { serverRouterMap });
+          router.addRoutes(accessRoutes) // 动态添加可访问路由表
           // hack方法 确保addRoutes已完成 ,
           // set the replace: true so the navigation will not leave a history record
           next({ ...to, replace: true })

@@ -41,5 +41,7 @@ export default {
   },
   unbind(el) {
     removeResizeListener(window.document.body, el.resizeListener)
+    if(window.document.body.__resizeListeners__ && window.document.body.__resizeListeners__ .length == 0)
+      window.document.body.__resizeListeners__ = undefined
   }
 }

@@ -52,7 +52,7 @@
   import {validateConfirm, require, pattern} from '../../utils/rules';
 
   export default {
-    name: "webUserDetail",
+    name: "WebUserDetail",
     components: {Sticky},
     data() {
       var validateConfirmPassword = (rule, value, callback) => validateConfirm(rule, value, callback, this.userForm.password, ['请再次填写确认密码', '两次密码不一致']);
@@ -100,7 +100,7 @@
               this.$store.dispatch('tagsView/delCurrentViews', {
                 view: this.$route,
                 $router: this.$router,
-                nextView: {name: 'webUserList'}
+                nextView: {name: 'WebUserList'}
               })
             }
           }

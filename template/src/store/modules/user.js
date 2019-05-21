@@ -1,5 +1,6 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import { resetRouter } from '@/router'
 
 const user = {
   state: {
@@ -73,7 +74,7 @@ const user = {
           }
           const data = response.data
 
-          console.log('[GetUserInfo]',response)
+          // console.log('[GetUserInfo]',response)
 
           let adminUser = data.adminUser;
           // if (adminUser.roles && adminUser.roles.length > 0) { // 验证返回的roles是否是一个非空数组
@@ -130,6 +131,7 @@ const user = {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()
+        resetRouter()
         resolve()
       })
     },

@@ -47,7 +47,7 @@
   import MdInput from '@/components/MDinput'
 
   export default {
-    name: 'roleList',
+    name: 'RoleList',
     components: {Disable, Pagination, MdInput},
     data() {
       return {
@@ -64,7 +64,7 @@
     },
     methods: {
       handleEdit(index, row) {
-        this.$router.push({name: 'roleDetail', query: {id: row.id}})
+        this.$router.push({name: 'RoleDetail', query: {id: row.id}})
       },
       async handleDelete(id, name) {
         if (name == '删除') {
@@ -82,7 +82,7 @@
         return fmDate(date, "yyyy-MM-dd")
       },
       addRole() {
-        this.$router.push({name: 'roleDetail'})
+        this.$router.push({name: 'RoleDetail'})
       },
       //搜索
       search() {
@@ -91,7 +91,7 @@
       },
       async init() {
         let resp = await getRoleList(this.params);
-        console.log('[测试接口]', resp);
+        // console.log('[测试接口]', resp);
         if (resp.data != null) {
           this.roleList = resp.data.dataList;
           this.total = resp.data.total;

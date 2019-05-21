@@ -4,7 +4,7 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 // create an axios instance
-console.log('[process.env.BASE_API]',process.env.VUE_APP_BASE_API)
+// console.log('[process.env.BASE_API]',process.env.VUE_APP_BASE_API)
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api的base_url
   // withCredentials: true, // 跨域请求时发送 cookies
@@ -15,7 +15,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(config => {
   // Do something before request is sent
-  console.log('[config]',config)
+  // console.log('[config]',config)
   if (store.getters.token) {
     // 让每个请求携带token
     config.headers['token'] = getToken()

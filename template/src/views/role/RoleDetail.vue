@@ -41,7 +41,7 @@
   import {require} from '../../utils/rules';
 
   export default {
-    name: "roleDetail",
+    name: "RoleDetail",
     components: {Sticky},
     data() {
       return {
@@ -76,7 +76,7 @@
               this.$store.dispatch('tagsView/delCurrentViews', {
                 view: this.$route,
                 $router: this.$router,
-                nextView: {name: 'roleList'}
+                nextView: {name: 'RoleList'}
               })
             }
           }
